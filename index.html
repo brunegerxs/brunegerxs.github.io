@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Repositorios - brunegerxs</title>
+    <!-- Fuente Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Encabezado -->
+        <header>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fa-solid fa-moon"></i> <span>Modo Oscuro</span>
+            </button>
+            <img id="profileAvatar" src="https://github.com/brunegerxs.png" alt="brunegerxs" class="profile-avatar">
+            <h1 class="title" id="profileName">brunegerxs</h1>
+            <p class="subtitle" id="profileBio">Catálogo dinámico de repositorios públicos de GitHub.</p>
+        </header>
+
+        <!-- Controles de Búsqueda -->
+        <div class="controls">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Buscar repositorio por nombre o lenguaje...">
+            </div>
+            <div class="stats-badge" id="repoCount">
+                Cargando repositorios...
+            </div>
+        </div>
+
+        <!-- Mensaje de Carga / Estado -->
+        <div id="loading" class="status-msg">
+            <i class="fa-solid fa-circle-notch fa-spin"></i> Obteniendo repositorios desde GitHub...
+        </div>
+
+        <!-- Grid de Repositorios -->
+        <div class="repo-grid" id="repoGrid"></div>
+    </div>
+
+    <!-- Script JS -->
+    <script src="script.js"></script>
+</body>
+</html>
