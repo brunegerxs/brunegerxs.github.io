@@ -1,6 +1,20 @@
 // CONFIGURACIÓN: Nombre de usuario de GitHub
 const USERNAME = 'brunegerxs';
 
+// DICCIONARIO DE DESCRIPCIONES PARA LA MUESTRA DE CIENCIAS
+// Aquí agregas la descripción de cada proyecto. Escribe el nombre exacto del repositorio.
+const descripcionesFeria = {
+    "aixd": "Descripción para el proyecto aixd...",
+    "esp32": "Proyecto utilizando el microcontrolador ESP32 para...",
+    "huerta2": "Segunda versión del sistema de automatización para la huerta escolar...",
+    "huerta": "Primer prototipo del sistema de riego para la huerta...",
+    "brunegerxs.github.io": "Catálogo web dinámico para presentar mis proyectos de ciencias.",
+    "brune": "Descripción para el repositorio brune...",
+    "index.html": "Página principal de prueba...",
+    "gantt_startup_software_gimnasios-2-.html-a-index.html": "Diagrama de Gantt para la organización del proyecto del gimnasio...",
+    "mi-sitio-web": "Mi primer sitio web personal..."
+};
+
 // Elementos del DOM
 const repoGrid = document.getElementById('repoGrid');
 const loading = document.getElementById('loading');
@@ -44,9 +58,13 @@ function renderRepos(repos) {
         const card = document.createElement('div');
         card.className = 'repo-card';
 
-        const description = repo.description 
-            ? repo.description 
-            : 'Sin descripción disponible para este repositorio.';
+        // LÓGICA DE DESCRIPCIÓN: Prioriza el diccionario, luego GitHub, luego texto por defecto
+        let description = 'Sin descripción disponible para este repositorio.';
+        if (descripcionesFeria[repo.name]) {
+            description = descripcionesFeria[repo.name];
+        } else if (repo.description) {
+            description = repo.description;
+        }
 
         const language = repo.language ? repo.language : 'Texto / Varios';
 
@@ -89,8 +107,14 @@ searchInput.addEventListener('input', (e) => {
     const searchTerm = e.target.value.toLowerCase();
     const filteredRepos = allRepos.filter(repo => {
         const nameMatch = repo.name.toLowerCase().includes(searchTerm);
-        const descMatch = repo.description && repo.description.toLowerCase().includes(searchTerm);
+        
+        // Permite buscar también por tu descripción personalizada
+        const customDesc = descripcionesFeria[repo.name] ? descripcionesFeria[repo.name].toLowerCase() : "";
+        const githubDesc = repo.description ? repo.description.toLowerCase() : "";
+        
+        const descMatch = customDesc.includes(searchTerm) || githubDesc.includes(searchTerm);
         const langMatch = repo.language && repo.language.toLowerCase().includes(searchTerm);
+        
         return nameMatch || descMatch || langMatch;
     });
     renderRepos(filteredRepos);
